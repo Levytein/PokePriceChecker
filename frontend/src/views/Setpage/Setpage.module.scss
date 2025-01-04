@@ -1,0 +1,73 @@
+.container{
+    width:100%;
+    padding-right:10px;
+}
+.headerContainer{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    .setHeader{
+        text-align: center;
+        font-size: 3rem;
+}
+.setImage{
+    max-width:440px;
+    
+}
+}
+
+.setCards{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap:16px;
+
+    grid-auto-columns:min-content;
+    
+    label{
+        color:rgb(192, 192, 192);
+    }
+    .cardSlot{
+        display:flex;
+        background-color: rgb(61, 61, 61);
+        border-radius: 10px;
+        .cardInfo{
+            display:flex;
+            width:100%;
+            flex-direction: column;
+            margin-left:2rem;
+            .cardName{
+                
+                font-weight:600;
+                font-size: 1.5rem;
+            }
+            .cardNumber{
+                font-weight:600;
+                font-size:1.2rem;
+            }
+            .cardRarity{
+                font-weight:600;
+            }
+           
+        }
+    }
+} 
+
+.priceValues{
+    display:flex;
+    gap:2rem;
+    width:100%;
+    label{
+        font-size:.8rem;
+    }
+    .priceLow{
+        color:rgb(255, 80, 80);
+        
+    }
+    .priceHigh{
+        color:rgb(90, 214, 165);
+    }
+    .priceContainer{
+        display:flex;
+        flex-direction: column;
+    }
+}

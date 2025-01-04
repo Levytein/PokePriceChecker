@@ -1,0 +1,105 @@
+.navContainer{
+    display:flex;
+    flex-direction: column;
+    height:100vh;
+    width:280px;
+    z-index: 10;
+    button{
+        background:none;
+        
+        border:1px solid white;
+        border-radius: 50%;
+        transition: background-color .2s;
+        &:hover{
+            background-color: white;
+        }
+    }
+    .seriesList{
+        margin-left:2rem;
+        list-style: none;
+        padding-right:10px;
+        
+        li{
+            align-content: center;
+            min-height:30px;
+            border-radius: 15px;
+        }
+        .seriesContainer{
+            display:flex;
+            flex-direction:column;
+            min-width:200px;
+            font-weight:600;
+            justify-content: space-around;
+            position:relative;
+          
+            z-index: 2;
+            .listSets{
+                z-index: 0;
+                display:none;
+                transform-origin: top;
+                animation: slideDown ease-in .3s;
+            
+                ul{
+                    list-style: none;
+                    margin-top:1rem;
+                    margin-left:1rem;
+
+                    li{
+                        padding:10px;
+                        transition: background-color .5s;
+                        &:hover{
+                            background-color: rgb(131, 129, 129);
+                        }
+                    }
+                }
+            }
+            .seriesNameText{
+                display:flex;
+                justify-content: space-around;
+                border-radius: 10px;
+                padding:10px;
+                transition:background-color .5s;
+                &:hover{
+                    background-color: rgb(131, 129, 129);
+                }
+                p{
+                    width:200px;
+                }
+            }
+        }
+        .seriesContainer.active{
+            .listSets{
+                display:block;
+            }
+        }
+        
+    }
+
+}
+
+.navHeader{
+    text-align: center;
+}
+.arrow {
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    margin-bottom:2px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+  }
+.listContainer{
+    overflow: hidden;
+    clip-path: inset(0 0 0 0);
+}
+:global{
+    @keyframes slideDown{
+        0%{
+            transform: scaleY(0);
+        }
+        100%{
+            transform: scaleY(1);
+        }
+    }
+}
