@@ -29,7 +29,25 @@ async function fetchCards() {
       throw error;
     }
   }
+  app.get('/search/:searchWord', async (req: Request, res: Response) => {
+    const { searchWord } = req.params;
 
+    try {
+      let cards;
+      const url = `https://api.pokemontcg.io/v2/cards?q=name:${searchWord}`;
+      //console.log('Sending request to API:', url);
+      const response = await axios.get(url);
+      cards = response.data;
+      res.json({ cards });
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error('Error fetching data from Pokémon API:', error.message);
+      } else {
+        console.error('Unknown error:', error);
+      }
+      res.status(500).json({ error: 'Failed to fetch data from Pokémon API' });
+    }
+  });
   app.get('/:series/:setID',async(req:Request, res: Response) =>{
     const {setID} = req.params;
     try {
@@ -70,6 +88,7 @@ function saveDataToCache(data: any) {
   fs.writeFileSync(cachedFile, JSON.stringify(cards, null, 2), 'utf-8');
 }
 
+
 app.get('/sets', async (req, res) => {
     try {
       let sets = readCachedData();
@@ -78,7 +97,6 @@ app.get('/sets', async (req, res) => {
         console.warn('Cached data is not an array. Fetching fresh data...');
         const fetchedData = await fetchCards();
         sets = fetchedData.data || fetchedData; // Ensure it's an array
-        console.log(sets);
         saveDataToCache(sets); // Save back to cache
       }
       res.json({sets}); // Send the array to the frontend
@@ -87,6 +105,7 @@ app.get('/sets', async (req, res) => {
       res.status(500).json({ error: 'Failed to fetch sets' });
     }
   });
+
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   console.error(err.message);
   res.status(500).json({ error: 'Something went wrong!' });

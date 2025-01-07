@@ -1,39 +1,15 @@
 .container{
     width:100%;
-    padding-left:1rem;
-    padding-right:1rem;
-    box-sizing: border-box;
-
-}
-.headerContainer{
     display:flex;
     flex-direction: column;
-    align-items: center;
-    .setInformation{
-        display:flex;
-        justify-content: space-around;
-        width:100%;
-        background-color: rgba(65, 105, 225, 0.384);
-        padding-top:2rem;
-        padding-bottom:2rem;
-        border-radius: 15px;
-        margin-top:2rem;
-        margin-bottom:2rem;
-        .setInfoText{
-            p{
-                font-size: 1.5rem;
-                font-weight:600;
-            }
-          
-        }
-    }
- 
-.setImage{
-    max-width:440px;
-    
-}
-}
+    box-sizing: border-box;
+    padding-right:1rem;
+    padding-left:1rem;
 
+    h2{
+        text-align: center;
+    }
+}
 .setCards{
     display:grid;
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
@@ -53,15 +29,37 @@
             width:100%;
             flex-direction: column;
             margin-left:1rem;
+            
+            .cardSetInfo{
+                display:flex;
+                font-weight:600;
+                font-size:.9rem;
+                .fromSet{
+                    width:50%;
+                }
+            }
+            .rarityArtist{
+                display:flex;
+                font-size:.9rem;
+         
+                .rarity{
+                    width:50%;
+                }
+                
+            }
             .cardName{
                 
                 font-weight:600;
                 font-size: 1.5rem;
             }
-            .cardNumber{
-                font-weight:600;
-                font-size:1.2rem;
+            .numberInSet{
+               
+                .cardNumber{
+                    font-weight:600;
+                    font-size:.9rem;
+                }
             }
+           
             .cardRarity{
                 font-weight:600;
             }
@@ -74,6 +72,7 @@
     display:flex;
     gap:2rem;
     width:100%;
+    justify-content: center;
     label{
         font-size:.8rem;
     }
@@ -94,7 +93,7 @@
     width:95%;
     justify-content: center;
     gap:2rem;
-    
+    margin-top:2rem;
     .sortButton{
         display:flex;
         width:150px;
@@ -171,5 +170,16 @@
         border:solid white;
         border-width: 0 3px 3px 0;
 
+    }
+ }
+ .priceHeading{
+    display:flex;
+    justify-content: center;
+ }
+ .cardPrices{
+    margin-top:1rem;
+    label{
+        display: flex;
+        justify-content: center;
     }
  }

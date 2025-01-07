@@ -4,6 +4,12 @@
   display:flex;
   
 }
+.containerR{
+  display:flex;
+  flex-direction: column;
+  width:100%;
+  
+}
 a{
   text-decoration: none;
   color:white;

@@ -1,9 +1,10 @@
 .navContainer{
     display:flex;
     flex-direction: column;
-    height:100vh;
+
     width:280px;
     z-index: 10;
+    border-right:1px solid rgb(47, 62, 108);
     button{
         background:none;
         
@@ -31,7 +32,8 @@
             font-weight:600;
             justify-content: space-around;
             position:relative;
-          
+            margin-bottom:.5rem;
+       
             z-index: 2;
             .listSets{
                 z-index: 0;
@@ -68,9 +70,18 @@
             }
         }
         .seriesContainer.active{
+            .seriesNameText{
+                background-color: rgb(131, 129, 129);
+                &:hover{
+                    background-color: rgb(184, 184, 184);
+                }
+            }
             .listSets{
                 display:block;
             }
+             .arrow{
+    animation: arrowUp .2s forwards ease-in;
+  }
         }
         
     }
@@ -88,7 +99,9 @@
     margin-bottom:2px;
     transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
+    
   }
+ 
 .listContainer{
     overflow: hidden;
     clip-path: inset(0 0 0 0);
@@ -101,5 +114,26 @@
         100%{
             transform: scaleY(1);
         }
+    }
+    @keyframes arrowUp{
+        0%{
+            transform:rotate(45deg);
+        }
+        100%{
+            
+            transform:translateY(4px) rotate(225deg); 
+        }
+        
+    }
+    @keyframes arrowDown{
+        0%{
+            
+            transform:translateY(4px) rotate(225deg); 
+        }
+        100%{
+            transform:rotate(45deg);
+        }
+       
+        
     }
 }
