@@ -1,14 +1,11 @@
-import Header from "../Header";
-import { useState ,useEffect} from "react"
 import styles from './Homepage.module.scss'
-import { Link } from "react-router-dom"
-import Navbar from "../Navbar/Navbar";
+
 function Homepage(){
   
   return (
 
     <div className={styles.container}>
-      <p>Hello</p>
+      <p>Click on a set to get started or search for a card</p>
       
       </div>
   )

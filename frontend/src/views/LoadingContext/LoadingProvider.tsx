@@ -1,8 +1,15 @@
-import React, { createContext, useState, useContext } from "react";
+import { createContext, useState, useContext } from "react";
 
-const LoadingContext = createContext();
+const LoadingContext = createContext({
+  loading: false,
+  progress: 0,
+  startLoading: () => {},
+  stopLoading: () => {},
+});
 
-export const LoadingProvider = ({ children }) => {
+import { ReactNode } from "react";
+
+export const LoadingProvider = ({ children }: { children: ReactNode }) => {
   const [loading, setLoading] = useState(false);
   const [progress, setProgress] = useState(0);
 

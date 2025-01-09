@@ -10,9 +10,11 @@ const app = express();
 const PORT = 6543;
 const cachedFile = 'cachedCards.json';
 
-app.use(cors());
-app.use(cors({ origin: 'http://localhost:5173' }));
-app.use(express.json());
+const allowedOrigin = process.env.NODE_ENV === 'production'
+  ? process.env.ALLOWED_ORIGIN
+  : 'http://localhost:5173';
+
+app.use(cors({ origin: allowedOrigin }));
 
 async function fetchCards() {
     try {

@@ -8,7 +8,7 @@ interface Card {
   images: { small: string };
   name: string;
   number: string;
-  set: { printedTotal: string };
+  set: { name: string; printedTotal: string };
   rarity: string;
   artist: string;
   tcgplayer?: { prices: { [key: string]: { low?: number; market?: number; high?: number } } };
@@ -20,10 +20,19 @@ function Setpage () {
     const [loading, setLoading] = useState(true);
     const [sortDirection, setSortDirection] = useState("asc"); 
     const { startLoading, stopLoading } = useLoading();
-    const [activeSort,setActiveSort] = useState(null);
+    const [activeSort, setActiveSort] = useState<string | null>(null);
 
-    const [originalCards, setOriginalCards] = useState([]);
-    const [setInfo,setInformationForSet] = useState({});
+    const [originalCards, setOriginalCards] = useState<Card[]>([]);
+    interface SetInfo {
+      name: string;
+      releaseDate: string;
+      series: string;
+      printedTotal: number;
+      total: number;
+      images: { logo: string };
+    }
+    
+    const [setInfo, setInformationForSet] = useState<SetInfo | null>(null);
     useEffect(() => {
         async function fetchCards() {
           const cleanup = startLoading();
@@ -34,7 +43,7 @@ function Setpage () {
             setCards(data.cards.data || []);
             setOriginalCards(data.cards.data || []);
 
-            if(setInfo.set === undefined)
+            if (!setInfo)
               {
                 setInformationForSet(data.cards.data[0].set);
               } 
@@ -57,7 +66,7 @@ function Setpage () {
         sortCards(itemName);
         handleToggle(itemName);
       }
-      const handleSearch = (e) => {
+      const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
         const searchValue = e.target.value.toLowerCase();
       
         if (searchValue === '') {
@@ -81,11 +90,11 @@ function Setpage () {
               break;
       
             case "price": {
-              const getLowestPrice = (card: any) => {
+              const getLowestPrice = (card: Card) => {
                 if (!card.tcgplayer?.prices) return 0;
                 const priceFields = Object.keys(card.tcgplayer.prices);
                 return priceFields.reduce((lowest, field) => {
-                  const price = card.tcgplayer.prices[field]?.low || 0;
+                  const price = card.tcgplayer?.prices[field]?.low || 0;
                   return Math.min(lowest, price);
                 }, Infinity);
               };
@@ -112,7 +121,7 @@ function Setpage () {
         setSortDirection(sortDirection === "asc" ? "desc" : "asc"); // Toggle direction
       };
 
-      const handleToggle = (itemName) =>
+      const handleToggle = (itemName:string) =>
         {
             if(activeSort === itemName)
             {
@@ -206,16 +215,16 @@ function Setpage () {
               <div className={styles.priceValues}>
               <div className={styles.priceContainer}>
               <label>Lowest:</label>
-              <p className={styles.priceLow}>${card.tcgplayer.prices[priceType]?.low || "N/A"}</p>
+              <p className={styles.priceLow}>${card.tcgplayer?.prices[priceType]?.low || "N/A"}</p>
               </div>
               <div className={styles.priceContainer}>
               <label>Market:</label>
-              <p className={styles.priceMarket}>${card.tcgplayer.prices[priceType]?.market || "N/A"}</p>
+              <p className={styles.priceMarket}>${card.tcgplayer?.prices[priceType]?.market || "N/A"}</p>
 
               </div>
               <div className={styles.priceContainer}>
               <label>Highest:</label>
-              <p className={styles.priceHigh}>${card.tcgplayer.prices[priceType]?.high || "N/A"}</p>
+              <p className={styles.priceHigh}>${card.tcgplayer?.prices[priceType]?.high || "N/A"}</p>
             </div>
               </div>
             </div>

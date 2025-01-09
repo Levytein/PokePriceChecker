@@ -6,7 +6,7 @@ function Searchbar (){
     const [searchWord,setSearchWord] = useState("");
     const navigate = useNavigate();
 
-    const handleKeyPress = (e) => {
+    const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
             e.preventDefault();
             console.log('Key Pressed:', e.key);

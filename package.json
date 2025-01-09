@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
  "scripts": {
-  "start": "npx install --omit=dev=false && concurrently \"npx:dev-backend\" \"npx:dev-frontend\"",
+  "start": "npm install && concurrently \"npm:dev-backend\" \"npm:dev-frontend\"",
   "dev-backend": "cd backend && npx run dev",
   "dev-frontend": "cd frontend && npx run dev"
 },

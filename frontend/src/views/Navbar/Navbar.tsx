@@ -1,9 +1,13 @@
 import styles from './Navbar.module.scss'
 import { useEffect, useState } from 'react';
 import { Link } from "react-router-dom"
-function Navbar ({isHidden,toggleNavbar}) {
-    const [sets, setSets] = useState([]);
-    const [cards,setCards] = useState([]);
+interface NavbarProps {
+  isHidden: boolean;
+  toggleNavbar: (prev: boolean) => void;
+}
+
+function Navbar ({isHidden, toggleNavbar}: NavbarProps) {
+    const [sets, setSets] = useState<{ id: string; name: string; series: string }[]>([]);
     const [series,setSeries] = useState([]);
     const [activeSerie,setActiveSerie] = useState(null);
     useEffect(() => {
@@ -15,8 +19,8 @@ function Navbar ({isHidden,toggleNavbar}) {
             if (data.sets && Array.isArray(data.sets)) {
               setSets(data.sets);
               const uniqueSeries = data.sets
-                .map((item) => item.series)
-                .filter((series, index, self) => self.indexOf(series) === index);
+                .map((item: { series: string }) => item.series)
+                .filter((series: string, index: number, self: string[]) => self.indexOf(series) === index);
               setSeries(uniqueSeries);
             } else {
               console.warn('Unexpected data structure:', data);
@@ -33,27 +37,15 @@ function Navbar ({isHidden,toggleNavbar}) {
       {
         return sets.filter((sets) => sets.series === seriesName)
       }
-      const fetchSetCards = async (setID:string) =>
-        {
-          try{
-            const response = await fetch(`http://localhost:5000/cards/${setID}`);
-            const data = await response.json();
-            console.log("Fetched the card",data);
-            setCards(data.cards || []);
-      
-          }
-          catch(error){
-            console.error("error fetching cards",error);
-          }
-        }
+   
      
-        const handleToggle = (itemName) =>
+        const handleToggle = (itemName:string) =>
         {
             setActiveSerie((prev)=> (prev === itemName ? null : itemName))
         }
         const handleNavBar = () =>
           {
-            toggleNavbar((prev) => !prev);
+            toggleNavbar(!isHidden);
           }
 
           return (
@@ -76,7 +68,7 @@ function Navbar ({isHidden,toggleNavbar}) {
                     <div className={styles.listSets}>
                       <div className={styles.listContainer}>
                         <ul>
-                    {getSetsBySeries(serie).map((set) => {
+                    {getSetsBySeries(serie).map((set: { id: string; name: string; series: string }) => {
                         const cleanedString = set.series.replace(/\s+/g, '');
                     
                         return (<Link to={`/${cleanedString}/${set.id}`} >
