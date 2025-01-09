@@ -2,8 +2,8 @@ import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import fs, { read } from 'fs';
 import axios from 'axios';
+import path from 'path';
 import * as dotenv from 'dotenv';
-
 dotenv.config();
 
 const app = express();
@@ -15,7 +15,11 @@ const allowedOrigin = process.env.NODE_ENV === 'production'
   : 'http://localhost:4173';
 
 app.use(cors({ origin: allowedOrigin }));
+app.use(express.static(path.join(__dirname, '../../frontend/dist')));
 
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../../frontend/dist/index.html'));
+});
 async function fetchCards() {
     try {
       const response = await axios.get('https://api.pokemontcg.io/v2/sets', {
