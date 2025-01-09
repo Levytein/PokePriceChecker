@@ -1,18 +1,32 @@
 import { useState,useEffect } from "react"
-import { useParams,useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { useLoading } from "../LoadingContext/LoadingProvider";
+
 import styles from './Setpage.module.scss'
+interface Card {
+  id: string;
+  images: { small: string };
+  name: string;
+  number: string;
+  set: { printedTotal: string };
+  rarity: string;
+  artist: string;
+  tcgplayer?: { prices: { [key: string]: { low?: number; market?: number; high?: number } } };
+}
+
 function Setpage () {
     const {setId } = useParams();
-    const [cards, setCards] = useState([]);
+    const [cards, setCards] = useState<Card[]>([]);
     const [loading, setLoading] = useState(true);
     const [sortDirection, setSortDirection] = useState("asc"); 
-
+    const { startLoading, stopLoading } = useLoading();
     const [activeSort,setActiveSort] = useState(null);
 
     const [originalCards, setOriginalCards] = useState([]);
     const [setInfo,setInformationForSet] = useState({});
     useEffect(() => {
         async function fetchCards() {
+          const cleanup = startLoading();
           try {
             const response = await fetch(`http://localhost:6543/cards/${setId}`);
             const data = await response.json();
@@ -30,7 +44,9 @@ function Setpage () {
             console.error('Error fetching cards:', error);
           } finally {
             setLoading(false);
+            stopLoading();
           }
+          cleanup();
         }
       
         fetchCards();
@@ -118,7 +134,7 @@ function Setpage () {
           <p className={styles.setHeader}>{setInfo.name}</p>
           </div>
           <div className={styles.setInfoText}>
-          <label>Release Date:</label>
+          <label>Released:</label>
           <p className={styles.setHeader}>{setInfo.releaseDate}</p>
           </div>
           <div className={styles.setInfoText}>
@@ -167,16 +183,20 @@ function Setpage () {
 
       <div className ={styles.setCards}>
         {cards.map((card) => (
-            <div className={styles.cardSlot} key={card.id}> 
-            <img src={card.images.small}></img>
-            <div className={styles.cardInfo}>
-              <label>Name:</label>
-            <p className={styles.cardName}>{card.name}</p>
-            <label>Number in Set:</label>
-            <p className={styles.cardNumber}>{card.number} / {card.set.printedTotal}</p>
-            <label>Rarity:</label>
-            <p className={styles.cardRarity}>{card.rarity}</p>
-            <p className={styles.cardArtist}>{card.artist}</p>
+         <div className={styles.cardSlot} key={card.id}>
+         <img src={card.images.small} alt={card.name} />
+         <div className={styles.cardInfo}>
+         
+           <p className={styles.cardName}>{card.name}</p>
+           <div className={styles.cardSetInfo}>
+             <div className={styles.fromSet}>
+             <p>{card.set.name}, {card.number} / {card.set.printedTotal} , {card.rarity || "N/A"}</p>
+             </div>
+             </div>
+           <div className={styles.artist}>
+             <label>Artist:</label>
+           <p className={styles.cardArtist}>{card.artist || "N/A"}</p>
+           </div>
             {card.tcgplayer?.prices && (
         <div className={styles.cardPrices}>
           <label>Prices:</label>

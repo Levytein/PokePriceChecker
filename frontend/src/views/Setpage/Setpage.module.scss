@@ -1,17 +1,184 @@
+@import '../../styles/breakpoints.scss';
+
 .container{
     width:100%;
     padding-left:1rem;
     padding-right:1rem;
     box-sizing: border-box;
-
+    
 }
+@media screen and (min-width: 374px) {
+    .setInformation {
+      font-size: 0.8rem;
+      padding-left:20px;
+      padding-right:20px;
+    }
+    .setImage{
+        width:80%;
+    }
+    .setInfoText{
+        font-size: .8rem;
+        max-width:100px;
+        text-align: center;
+    }
+    .cardSlot{
+        max-width:95%;
+        padding:7px;
+
+        
+        img{
+            height:185px;
+            align-self: center;
+        }
+        .cardInfo{
+            margin-top:0px;
+        }
+    }
+    .sortButtons{
+        gap:1rem;
+        font-size:1rem;
+        .sortArrow{
+            margin-left:1rem;
+        }
+        .searchBar{
+            width:150px;
+            font-size: 1;
+            padding-left: .5rem;
+        }
+    }
+    .priceValues{
+        font-size:.8rem;
+        gap:1.3rem;
+    }
+    .cardPrices{
+        margin-top:0;
+    }
+  }
+
+  @media screen and (min-width: 500px) {
+    .container{
+        width:95%;
+        justify-content: center;
+    }
+    .setImage{
+        width:50%;
+        max-width:500px;
+    }
+    .cardSlot{
+        max-width:95%;
+        padding:10px;
+        
+        img{
+            height:300px;
+        }
+        .cardInfo{
+            margin-top:0px;
+        }
+    }
+    .setInformation {
+      font-size: 0.8rem;
+      padding-left:20px;
+      padding-right:20px;
+      gap:1rem;
+    }
+    .sortButtons{
+        gap:1rem;
+        font-size:.5rem;
+        .sortArrow{
+            margin-left:.5rem;
+        }
+        .searchBar{
+            width:120px;
+            font-size: .65rem;
+            padding-left: .5rem;
+        }
+    }
+    .priceValues{
+        font-size:.8rem;
+        gap:1.3rem;
+    }
+    .setInfoText{
+        font-size:1rem;
+        max-width:none;
+        text-align: center;
+    }
+    .cardPrices{
+        margin-top:1rem;
+    }
+  }
+  @media screen and (min-width: 800px) {
+  .cardSlot{
+    max-width:95%;
+    padding:10px;
+    
+    img{
+        height:300px;
+    }
+    .cardInfo{
+        margin-top:0px;
+    }
+    .priceValues{
+        font-size:1.2rem;
+        gap:1.3rem;
+    }
+}
+  }
+  @media screen and (min-width: 1200px) {
+    .setCards {
+
+      grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+
+    }
+   
+    .setInfoText{
+        font-size:1.4rem;
+        max-width:none;
+        text-align: center;
+    }
+    .setInformation {
+      font-size: 1.4rem;
+    }
+    .sortButtons{
+        gap:2rem;
+    
+        
+        .sortButton{
+            font-size:1.3rem;
+        }
+        .searchBar{
+            width:400px;
+            font-size: 1.2rem;
+            padding-left: 1rem;
+        }
+    }
+    .cardSlot{
+        max-width:95%;
+        padding:10px;
+        
+        img{
+            height:325px;
+        }
+        .cardInfo{
+            margin-top:0px;
+        }
+        .priceValues{
+            font-size:1.2rem;
+            gap:1.3rem;
+        }
+    }
+   
+  }
 .headerContainer{
     display:flex;
     flex-direction: column;
     align-items: center;
+    .setImage{
+        margin-top:2rem;
+    }
     .setInformation{
         display:flex;
         justify-content: space-around;
+        min-width:300px;
         width:100%;
         background-color: rgba(65, 105, 225, 0.384);
         padding-top:2rem;
@@ -20,25 +187,23 @@
         margin-top:2rem;
         margin-bottom:2rem;
         .setInfoText{
+      
             p{
-                font-size: 1.5rem;
                 font-weight:600;
             }
           
         }
+      
     }
  
-.setImage{
-    max-width:440px;
-    
-}
+
 }
 
 .setCards{
     display:grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+ 
     gap:16px;
-
+    justify-content: center;
     grid-auto-columns:min-content;
     
     label{
@@ -53,15 +218,45 @@
             width:100%;
             flex-direction: column;
             margin-left:1rem;
+            margin-top:1rem;
+            .cardSetInfo{
+                display:flex;
+                font-weight:600;
+           
+                font-size:14px;
+                .fromSet{
+                    color:rgb(163, 162, 162);
+                    width:100%;
+                    transition:color .2s,drop-shadow 1s;
+                    &:hover{
+                        color:rgb(96, 124, 206);
+                        filter:drop-shadow(0px 0px 5px rgb(96, 124, 206));
+                        cursor:pointer;
+                    }
+                }
+            }
+            .rarityArtist{
+                display:flex;
+                font-size:.9rem;
+         
+                .rarity{
+                    width:50%;
+                }
+                
+            }
             .cardName{
                 
                 font-weight:600;
                 font-size: 1.5rem;
             }
-            .cardNumber{
-                font-weight:600;
-                font-size:1.2rem;
+            .numberInSet{
+               
+                .cardNumber{
+                    font-weight:600;
+                    font-size:.9rem;
+                }
             }
+           
             .cardRarity{
                 font-weight:600;
             }
@@ -69,11 +264,11 @@
         }
     }
 } 
-
 .priceValues{
     display:flex;
-    gap:2rem;
+
     width:100%;
+    justify-content: center;
     label{
         font-size:.8rem;
     }
@@ -93,7 +288,7 @@
     display:flex;
     width:95%;
     justify-content: center;
-    gap:2rem;
+ 
     
     .sortButton{
         display:flex;
@@ -102,7 +297,7 @@
         justify-content: space-around;
         align-items: center;
         font-weight:600;
-        font-size:1.2rem;
+       
         border-radius: 10px;
         border: none;
         background-color: rgb(47, 62, 108);
@@ -115,15 +310,15 @@
         border-radius: 10px;
         font-weight:600;
         border:none;
-        transition:all .2s;
-        width:500px;
-        font-size:1.2rem;
-        padding-left:1rem;
-        &:focus{
-            outline: 2px solid rgb(47, 62, 108) ;
-        }
+        transition:outline .2s;
+ 
+        transition: filter .2s;
         &:hover{
-            outline: 2px solid rgb(47, 62, 108) ;
+            filter:drop-shadow(0px 0px 5px rgb(116, 151, 255));
+        }
+        &:focus{
+            outline: 2px solid rgb(231, 237, 255) ;
+            filter:none
         }
     }
     margin-bottom:2rem;
@@ -173,3 +368,4 @@
 
     }
  }
+ 

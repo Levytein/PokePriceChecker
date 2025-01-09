@@ -1,29 +1,33 @@
 .navContainer{
     display:flex;
     flex-direction: column;
-
+    position: fixed;
+    top:0;
+    left:0;
     width:280px;
     z-index: 10;
+    height:100%;
+
     border-right:1px solid rgb(47, 62, 108);
-    button{
-        background:none;
-        
-        border:1px solid white;
-        border-radius: 50%;
-        transition: background-color .2s;
-        &:hover{
-            background-color: white;
-        }
-    }
+    background-color: rgb(36, 36, 36);
     .seriesList{
         margin-left:2rem;
         list-style: none;
         padding-right:10px;
-        
         li{
             align-content: center;
             min-height:30px;
             border-radius: 15px;
+        }
+        button{
+            background:none;
+            
+            border:1px solid white;
+            border-radius: 50%;
+            transition: background-color .2s;
+            &:hover{
+                background-color: white;
+            }
         }
         .seriesContainer{
             display:flex;
@@ -87,9 +91,23 @@
     }
 
 }
+.navContainer.inactiveNavBar{
+    animation:slideLeftShrink .2s forwards ease-in;
+    .controlButton{
 
+        visibility: visible;
+        right:-30px;
+    }
+
+}
+.navContainer.activeNavBar{
+    animation:slideRightGrow .3s forwards ease-in;
+}
 .navHeader{
     text-align: center;
+}
+.listContainer{
+    overflow-y:auto;
 }
 .arrow {
     border: solid white;
@@ -103,10 +121,52 @@
   }
  
 .listContainer{
-    overflow: hidden;
-    clip-path: inset(0 0 0 0);
+    overflow-y: auto;
+    overflow-x:hidden;
+    scrollbar-width: none;
 }
+.controlButton{
+    width:40px;
+    height:40px;
+    position: absolute;
+    top:150px;
+    right:-20px;
+    border:none;    
+    background-color: rgba($color: #000000, $alpha: 0.0);
+    transition:all .5s;
+    .bigArrow{
+        
+        border: solid white;
+        border-width: 0 8px 8px 0;
+        display: inline-block;
+        padding: 6px;
+        margin-bottom:2px;
+        transform: rotate(-95deg);
+        -webkit-transform: rotate(-45deg);
+        
+  }
+}
+
 :global{
+    @keyframes slideLeftShrink{
+        0%{
+            
+        }
+        100%{
+            transform:translateX(-100%);
+            
+            visibility:hidden;
+        }
+    }
+    @keyframes slideRightGrow{
+        0%{
+            transform:translateX(-100%);
+        }
+        100%{
+            transform:translateX(0%);
+            
+        }
+    }
     @keyframes slideDown{
         0%{
             transform: scaleY(0);

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import styles from './SearchPage.module.scss';
-
+import { useLoading } from "../LoadingContext/LoadingProvider";
 interface Card {
   id: string;
   images: { small: string };
@@ -19,12 +19,14 @@ function SearchPage() {
   const [loading, setLoading] = useState(true);
   const [sortDirection, setSortDirection] = useState("asc"); 
 
+  const { startLoading, stopLoading } = useLoading();
   const [activeSort,setActiveSort] = useState(null);
 
   const [originalCards, setOriginalCards] = useState([]);
 
   useEffect(() => {
     const fetchSearchResults = async () => {
+      const cleanup = startLoading();
       try {
         const url = `http://localhost:6543/search/${searchWord}`;
         //console.log('Fetching URL:', url);
@@ -38,7 +40,10 @@ function SearchPage() {
         console.error("Error fetching search results:", error);
       } finally {
         setLoading(false);
+        stopLoading();
       }
+      cleanup();
+
     };
 
     fetchSearchResults();
@@ -156,32 +161,23 @@ function SearchPage() {
               <div className={styles.cardSlot} key={card.id}>
                 <img src={card.images.small} alt={card.name} />
                 <div className={styles.cardInfo}>
-                  <label>Name:</label>
+                
                   <p className={styles.cardName}>{card.name}</p>
                   <div className={styles.cardSetInfo}>
+                    <Link to={`/${card.set.name}/${card.set.id}`} >
                     <div className={styles.fromSet}>
-                    <label>Set:</label>
-                    <p>{card.set.name}</p>
+                    <p>{card.set.name}, {card.number} / {card.set.printedTotal} , {card.rarity || "N/A"}</p>
                     </div>
-                    <div className={styles.numberInSet}>
-
-                    <label>Number:</label>
-                  <p className={styles.cardNumber}>{card.number} / {card.set.printedTotal}</p>
-                  </div>
-                  </div>
-                  <div className={styles.rarityArtist}>
-                  <div className={styles.rarity}>
-                  <label>Rarity:</label>
-                  <p className={styles.cardRarity}>{card.rarity || "N/A"}</p>
-                  </div>
+                    </Link>
+                    </div>
                   <div className={styles.artist}>
                     <label>Artist:</label>
                   <p className={styles.cardArtist}>{card.artist || "N/A"}</p>
                   </div>
-                  </div>
+    
                   {card.tcgplayer?.prices && (
                     <div className={styles.cardPrices}>
-                      <label>Prices</label>
+                      <label>Prices:</label>
                       {Object.keys(card.tcgplayer.prices).map((priceType) => (
                         <div key={priceType}>
                           <strong className={styles.priceHeading}>{priceType.charAt(0).toUpperCase() + priceType.slice(1)}:</strong>

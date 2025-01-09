@@ -1,7 +1,7 @@
 import styles from './Navbar.module.scss'
 import { useEffect, useState } from 'react';
 import { Link } from "react-router-dom"
-function Navbar () {
+function Navbar ({isHidden,toggleNavbar}) {
     const [sets, setSets] = useState([]);
     const [cards,setCards] = useState([]);
     const [series,setSeries] = useState([]);
@@ -51,10 +51,16 @@ function Navbar () {
         {
             setActiveSerie((prev)=> (prev === itemName ? null : itemName))
         }
-
+        const handleNavBar = () =>
+          {
+            toggleNavbar((prev) => !prev);
+          }
 
           return (
-            <div className={styles.navContainer}>
+            <div className={`${styles.navContainer} ${isHidden ? styles.activeNavBar : styles.inactiveNavBar} `}>
+              <button onClick={handleNavBar} className={styles.controlButton}><i className={styles.bigArrow}></i></button>
+           
+              <div className={styles.listContainer}>
               <h1 className={styles.navHeader}>PokeCheck</h1>
               <ul className={styles.seriesList}>
                 {series.map((serie, index) => (
@@ -84,6 +90,7 @@ function Navbar () {
                     </li>
                 ))}
               </ul>
+              </div>
             </div>
           );
         }

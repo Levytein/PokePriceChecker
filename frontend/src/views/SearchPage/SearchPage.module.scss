@@ -1,20 +1,178 @@
 .container{
-    width:100%;
+
     display:flex;
     flex-direction: column;
     box-sizing: border-box;
-    padding-right:1rem;
-    padding-left:1rem;
+
 
     h2{
         text-align: center;
     }
+    .headerContainer{
+        display:flex;
+        justify-content: center;
+        margin-top:3rem;
+    }
 }
-.setCards{
-    display:grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap:16px;
+@media screen and (min-width: 374px) {
+    .setInformation {
+      font-size: 0.8rem;
+      padding-left:20px;
+      padding-right:20px;
+    }
+    .setImage{
+        width:80%;
+    }
+    .setInfoText{
+        font-size: .8rem;
+        max-width:100px;
+        text-align: center;
+    }
+    .cardSlot{
+        max-width:95%;
+        padding:7px;
+        
+        
+        img{
+            height:250px;
+            align-self: center;
+        }
+        .cardInfo{
+            margin-top:0px;
+        }
+    }
+    .sortButtons{
+        gap:1rem;
+        font-size:1rem;
+        .sortArrow{
+            margin-left:1rem;
+        }
+        .searchBar{
+            width:150px;
+            font-size: 1;
+            padding-left: .5rem;
+        }
+    }
+    .priceValues{
+        font-size:.8rem;
+        gap:1.3rem;
+    }
+  }
 
+  @media screen and (min-width: 500px) {
+    .container{
+        width:95%;
+        justify-content: center;
+    }
+    .setImage{
+        width:50%;
+        max-width:500px;
+    }
+    .cardSlot{
+        max-width:95%;
+        padding:10px;
+        
+        img{
+            height:300px;
+        }
+        .cardInfo{
+            margin-top:0px;
+        }
+    }
+    .setInformation {
+      font-size: 0.8rem;
+      padding-left:20px;
+      padding-right:20px;
+      gap:1rem;
+    }
+    .sortButtons{
+        gap:1rem;
+        font-size:.5rem;
+        .sortArrow{
+            margin-left:.5rem;
+        }
+        .searchBar{
+            width:120px;
+            font-size: .65rem;
+            padding-left: .5rem;
+        }
+    }
+    .priceValues{
+        font-size:.8rem;
+        gap:1.3rem;
+    }
+    .setInfoText{
+        font-size:1rem;
+        max-width:none;
+        text-align: center;
+    }
+  }
+  @media screen and (min-width: 800px) {
+  .cardSlot{
+    max-width:95%;
+    padding:10px;
+    
+    img{
+        height:300px;
+    }
+    .cardInfo{
+        margin-top:0px;
+    }
+    .priceValues{
+        font-size:1.2rem;
+        gap:1.3rem;
+    }
+}
+  }
+  @media screen and (min-width: 1200px) {
+    .setCards {
+
+      grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+
+    }
+    .setInfoText{
+        font-size:1.4rem;
+        max-width:none;
+        text-align: center;
+    }
+    .setInformation {
+      font-size: 1.4rem;
+    }
+    .sortButtons{
+        gap:2rem;
+    
+        
+        .sortButton{
+            font-size:1.3rem;
+        }
+        .searchBar{
+            width:400px;
+            font-size: 1.2rem;
+            padding-left: 1rem;
+        }
+    }
+    .cardSlot{
+        max-width:95%;
+        padding:10px;
+        
+        img{
+            height:350px;
+        }
+        .cardInfo{
+            margin-top:0px;
+        }
+        .priceValues{
+            font-size:1rem;
+            gap:1rem;
+        }
+    }
+   
+  }
+  .setCards{
+    display:grid;
+ 
+    gap:16px;
+    justify-content: center;
     grid-auto-columns:min-content;
     
     label{
@@ -29,13 +187,21 @@
             width:100%;
             flex-direction: column;
             margin-left:1rem;
-            
+            margin-top:1rem;
             .cardSetInfo{
                 display:flex;
                 font-weight:600;
-                font-size:.9rem;
+           
+                font-size:14px;
                 .fromSet{
-                    width:50%;
+                    color:rgb(163, 162, 162);
+                    width:100%;
+                    transition:color .2s,drop-shadow 1s;
+                    &:hover{
+                        color:rgb(96, 124, 206);
+                        filter:drop-shadow(0px 0px 5px rgb(96, 124, 206));
+                        cursor:pointer;
+                    }
                 }
             }
             .rarityArtist{
@@ -67,10 +233,9 @@
         }
     }
 } 
-
 .priceValues{
     display:flex;
-    gap:2rem;
+
     width:100%;
     justify-content: center;
     label{
@@ -92,8 +257,8 @@
     display:flex;
     width:95%;
     justify-content: center;
-    gap:2rem;
-    margin-top:2rem;
+ 
+    
     .sortButton{
         display:flex;
         width:150px;
@@ -101,7 +266,7 @@
         justify-content: space-around;
         align-items: center;
         font-weight:600;
-        font-size:1.2rem;
+       
         border-radius: 10px;
         border: none;
         background-color: rgb(47, 62, 108);
@@ -114,15 +279,15 @@
         border-radius: 10px;
         font-weight:600;
         border:none;
-        transition:all .2s;
-        width:500px;
-        font-size:1.2rem;
-        padding-left:1rem;
-        &:focus{
-            outline: 2px solid rgb(47, 62, 108) ;
-        }
+        transition:outline .2s;
+ 
+        transition: filter .2s;
         &:hover{
-            outline: 2px solid rgb(47, 62, 108) ;
+            filter:drop-shadow(0px 0px 5px rgb(116, 151, 255));
+        }
+        &:focus{
+            outline: 2px solid rgb(231, 237, 255) ;
+            filter:none
         }
     }
     margin-bottom:2rem;
@@ -172,14 +337,6 @@
 
     }
  }
- .priceHeading{
-    display:flex;
-    justify-content: center;
- }
  .cardPrices{
     margin-top:1rem;
-    label{
-        display: flex;
-        justify-content: center;
-    }
  }
