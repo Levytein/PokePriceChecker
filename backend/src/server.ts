@@ -12,7 +12,7 @@ const cachedFile = 'cachedCards.json';
 
 const allowedOrigin = process.env.NODE_ENV === 'production'
   ? process.env.ALLOWED_ORIGIN
-  : 'http://localhost:5173';
+  : 'http://localhost:4173';
 
 app.use(cors({ origin: allowedOrigin }));
 
