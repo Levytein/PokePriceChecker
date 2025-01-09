@@ -9,12 +9,12 @@ interface NavbarProps {
 function Navbar ({isHidden, toggleNavbar}: NavbarProps) {
     const [sets, setSets] = useState<{ id: string; name: string; series: string }[]>([]);
     const [series,setSeries] = useState([]);
-    const [activeSerie,setActiveSerie] = useState(null);
+    const [activeSerie, setActiveSerie] = useState<string | null>(null);
     useEffect(() => {
         async function fetchSets() {
           try {
             console.log('Fetching data...');
-            const response = await fetch('http://localhost:6543/sets');
+            const response = await fetch('https://localhost:6543/sets');
             const data = await response.json();
             if (data.sets && Array.isArray(data.sets)) {
               setSets(data.sets);

@@ -9,13 +9,13 @@ dotenv.config();
 const app = express();
 const PORT = 6543;
 const cachedFile = 'cachedCards.json';
-
+import '../../frontend/dist/index.html'
 const allowedOrigin = process.env.NODE_ENV === 'production'
   ? process.env.ALLOWED_ORIGIN
-  : 'http://localhost:4173';
+  : 'http://localhost:5173';
 
 app.use(cors({ origin: allowedOrigin }));
-app.use(express.static(path.join(__dirname, '../../frontend/dist')));
+app.use(express.static(path.join(__dirname, '')));
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../../frontend/dist/index.html'));
@@ -118,5 +118,5 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`🚀 Server is running on http://localhost:${PORT}`);
+  console.log(`🚀 Server is running on https://localhost:${PORT}`);
 });

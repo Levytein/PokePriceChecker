@@ -37,7 +37,7 @@ function Setpage () {
         async function fetchCards() {
           const cleanup = startLoading();
           try {
-            const response = await fetch(`http://localhost:6543/cards/${setId}`);
+            const response = await fetch(`https://localhost:6543/cards/${setId}`);
             const data = await response.json();
      
             setCards(data.cards.data || []);

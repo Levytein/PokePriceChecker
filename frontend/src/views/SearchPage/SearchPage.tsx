@@ -28,7 +28,7 @@ function SearchPage() {
     const fetchSearchResults = async () => {
       const cleanup = startLoading();
       try {
-        const url = `http://localhost:6543/search/${searchWord}`;
+        const url = `https://localhost:6543/search/${searchWord}`;
         //console.log('Fetching URL:', url);
         const response = await fetch(url);
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
