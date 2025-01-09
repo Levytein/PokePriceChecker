@@ -2,12 +2,11 @@
   "name": "pokemoncards",
   "version": "1.0.0",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "concurrently \"npm:dev-backend\" \"npm:dev-frontend\"",
-    "dev-backend": "cd backend && npm run dev",
-    "dev-frontend": "cd frontend && npm run dev"
-  },
+ "scripts": {
+  "start": "npm install --omit=dev=false && concurrently \"npm:dev-backend\" \"npm:dev-frontend\"",
+  "dev-backend": "cd backend && npm run dev",
+  "dev-frontend": "cd frontend && npm run dev"
+},
   "keywords": [],
   "author": "",
   "license": "ISC",
