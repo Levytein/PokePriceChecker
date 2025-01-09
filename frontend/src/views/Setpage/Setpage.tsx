@@ -31,14 +31,15 @@ function Setpage () {
       total: number;
       images: { logo: string };
     }
-    const API_URL = process.env.REACT_APP_API_URL;
+    const apiUrl = import.meta.env.VITE_API_URL;
 
     const [setInfo, setInformationForSet] = useState<SetInfo | null>(null);
     useEffect(() => {
         async function fetchCards() {
           const cleanup = startLoading();
           try {
-            const response = await fetch(`${API_URL}/cards/${setId}`);
+            console.log(API_URL);
+            const response = await fetch(`${apiUrl ||`http://localhost:6543` }/cards/${setId}`);
             const data = await response.json();
      
             setCards(data.cards.data || []);

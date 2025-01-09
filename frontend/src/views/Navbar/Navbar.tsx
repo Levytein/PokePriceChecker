@@ -10,12 +10,12 @@ function Navbar ({isHidden, toggleNavbar}: NavbarProps) {
     const [sets, setSets] = useState<{ id: string; name: string; series: string }[]>([]);
     const [series,setSeries] = useState([]);
     const [activeSerie, setActiveSerie] = useState<string | null>(null);
-    const API_URL = process.env.REACT_APP_API_URL;
+    const apiUrl = import.meta.env.VITE_API_URL;
     useEffect(() => {
         async function fetchSets() {
           try {
             console.log('Fetching data...');
-            const response = await fetch(`${API_URL}/sets`);
+            const response = await fetch(`${apiUrl ||`http://localhost:6543` }/sets`);
             const data = await response.json();
             if (data.sets && Array.isArray(data.sets)) {
               setSets(data.sets);
