@@ -9,7 +9,6 @@ dotenv.config();
 const app = express();
 const PORT = 6543;
 const cachedFile = 'cachedCards.json';
-import '../../frontend/dist/index.html'
 const allowedOrigin = process.env.NODE_ENV === 'production'
   ? process.env.ALLOWED_ORIGIN
   : 'http://localhost:5173';
