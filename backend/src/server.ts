@@ -96,13 +96,13 @@ function saveDataToCache(data: any) {
 
 app.get('/sets', async (req, res) => {
     try {
-      let sets = readCachedData();
+      let sets ;
   
       if (!Array.isArray(sets)) {
         console.warn('Cached data is not an array. Fetching fresh data...');
         const fetchedData = await fetchCards();
         sets = fetchedData.data || fetchedData; // Ensure it's an array
-        saveDataToCache(sets); // Save back to cache
+// Save back to cache
       }
       res.json({sets}); // Send the array to the frontend
     } catch (error) {
