@@ -17,7 +17,8 @@ app.use(cors({ origin: allowedOrigin }));
 app.use(express.static(path.join(__dirname, '')));
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../../frontend/dist/index.html'));
+
+  res.send('Hello from Express!');
 });
 async function fetchCards() {
     try {
@@ -117,5 +118,6 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
 });
 
 app.listen(PORT, () => {
+  console.log(process.env.ALLOWED_ORIGIN);
   console.log(`🚀 Server is running on https://localhost:${PORT}`);
 });
