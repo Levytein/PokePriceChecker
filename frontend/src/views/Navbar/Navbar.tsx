@@ -15,7 +15,8 @@ function Navbar ({isHidden, toggleNavbar}: NavbarProps) {
         async function fetchSets() {
           try {
             console.log('Fetching data...');
-            const response = await fetch(`${apiUrl ||`http://localhost:6543` }/sets`);
+            console.log(apiUrl);
+            const response = await fetch(`${apiUrl ||`http://localhost:6543/` }sets`);
             const data = await response.json();
             if (data.sets && Array.isArray(data.sets)) {
               setSets(data.sets);
