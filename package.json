@@ -4,8 +4,8 @@
   "main": "index.js",
  "scripts": {
   "start": "npm install && concurrently \"npm:dev-backend\" \"npm:dev-frontend\"",
-  "dev-backend": "cd backend && npx run dev",
-  "dev-frontend": "cd frontend && npx run dev"
+  "dev-frontend": "cd frontend && npm run dev",
+  "dev-backend": "cd backend && npm run dev"
 },
   "keywords": [],
   "author": "",
