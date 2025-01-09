@@ -23,12 +23,12 @@ function SearchPage() {
   const [activeSort, setActiveSort] = useState<string | null>(null);
 
   const [originalCards, setOriginalCards] = useState<Card[]>([]);
-
+  const API_URL = process.env.REACT_APP_API_URL;
   useEffect(() => {
     const fetchSearchResults = async () => {
       const cleanup = startLoading();
       try {
-        const url = `https://localhost:6543/search/${searchWord}`;
+        const url = `${API_URL}/search/${searchWord}`;
         //console.log('Fetching URL:', url);
         const response = await fetch(url);
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
