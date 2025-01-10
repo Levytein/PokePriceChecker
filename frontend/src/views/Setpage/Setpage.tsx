@@ -159,6 +159,8 @@ function Setpage () {
         </div>
         <div className={styles.sortButtons}>
         <input className={styles.searchBar} onChange={handleSearch} type='text' placeholder="Search for a card here"/>
+        <div className={styles.buttonContainer}>
+
   <button onClick={() => {
     handleSortToggle('name');
     }} className={`${styles.sortButton} ${activeSort === 'name' ? styles.activeSortButton : ""} ${activeSort ==='name' && sortDirection ==='desc' ? styles.activeSortDesc: ''} ${activeSort ==='name' && sortDirection ==='asc'  ? styles.activeSortAsc: ''} `}>
@@ -186,6 +188,8 @@ function Setpage () {
         <i className={styles.arrowDown}></i>
       </div>
   </button>
+  
+  </div>
 </div>
       </>
       )}

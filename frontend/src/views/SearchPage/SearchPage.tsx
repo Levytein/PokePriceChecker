@@ -24,12 +24,12 @@ function SearchPage() {
 
   const [originalCards, setOriginalCards] = useState<Card[]>([]);
   const apiUrl = import.meta.env.VITE_API_URL;
-  ;
+
   useEffect(() => {
     const fetchSearchResults = async () => {
       const cleanup = startLoading();
       try {
-        const url = `${apiUrl ||`http://localhost:6543/` }search/${searchWord}`;
+        const url = `${`http://localhost:6543/`}search/${searchWord}`;
         //console.log('Fetching URL:', url);
         const response = await fetch(url);
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
@@ -126,6 +126,7 @@ function SearchPage() {
            <div className={styles.headerContainer}>
            <div className={styles.sortButtons}>
         <input className={styles.searchBar} onChange={handleSearch} type='text' placeholder="Search for a card here"/>
+        <div className={styles.buttonContainer}>
   <button onClick={() => {
     handleSortToggle('name');
     }} className={`${styles.sortButton} ${activeSort === 'name' ? styles.activeSortButton : ""} ${activeSort ==='name' && sortDirection ==='desc' ? styles.activeSortDesc: ''} ${activeSort ==='name' && sortDirection ==='asc'  ? styles.activeSortAsc: ''} `}>
@@ -153,6 +154,7 @@ function SearchPage() {
         <i className={styles.arrowDown}></i>
       </div>
   </button>
+  </div>
 </div>
 
            </div>

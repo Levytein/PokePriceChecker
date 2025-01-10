@@ -16,10 +16,6 @@ const allowedOrigin = process.env.NODE_ENV === 'production'
 app.use(cors({ origin: allowedOrigin }));
 app.use(express.static(path.join(__dirname, '')));
 
-app.get('*', (req, res) => {
-
-  res.send('Hello from Express!');
-});
 async function fetchCards() {
     try {
       const response = await axios.get('https://api.pokemontcg.io/v2/sets', {

@@ -35,15 +35,28 @@
         }
     }
     .sortButtons{
-        gap:1rem;
+        display:flex;
+        flex-direction: column;
+       
         font-size:1rem;
+        align-items: center;
+        .buttonContainer{
+            display:flex;
+            gap:1rem;
+            margin-top:1rem;
+        }
+        
         .sortArrow{
-            margin-left:1rem;
+            margin-left:4px;
         }
         .searchBar{
             width:150px;
+            height:40px;
             font-size: 1;
             padding-left: .5rem;
+        }
+        .sortButton{
+            width:80px;
         }
     }
     .priceValues{
@@ -76,19 +89,35 @@
         }
     }
     .setInformation {
+        width:90%;
       font-size: 0.8rem;
       padding-left:20px;
       padding-right:20px;
       gap:1rem;
     }
     .sortButtons{
+        display:flex;
+        flex-direction: row;
         gap:1rem;
         font-size:.5rem;
+        .buttonContainer{
+            display:flex;
+            gap:1rem;
+            margin-top:1rem;
+        }
         .sortArrow{
             margin-left:.5rem;
         }
+        .sortButton{
+            width:80px;
+        }
+        .buttonContainer{
+            display:flex;
+            gap:1rem;
+            margin-top:0rem;
+        }
         .searchBar{
-            width:120px;
+            width:200px;
             font-size: .65rem;
             padding-left: .5rem;
         }
@@ -179,7 +208,7 @@
         display:flex;
         justify-content: space-around;
         min-width:300px;
-        width:100%;
+        
         background-color: rgba(65, 105, 225, 0.384);
         padding-top:2rem;
         padding-bottom:2rem;
@@ -292,7 +321,7 @@
     
     .sortButton{
         display:flex;
-        width:150px;
+        
         height:40px;
         justify-content: space-around;
         align-items: center;
