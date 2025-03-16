@@ -169,8 +169,10 @@
     }
     .sortButtons{
         gap:2rem;
-    
-        
+        min-width:150px;
+        .sortArrow{
+            margin-left:0;
+        }
         .sortButton{
             font-size:1.3rem;
         }
